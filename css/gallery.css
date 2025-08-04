@@ -1,0 +1,848 @@
+/*
+-- notes on toggles --
+
+article			= container for toggle + toggled content
+
+TOGGLE - for plain + ol embedded toggles
+.toggle + .lbl-toggle + .tog-wrap
+.toggle:checked + .lbl-toggle + .tog-wrap
+
+TOGGLE - small, for extra info
+.toggle + .lbl-toggle.info + .tog-wrap
+.toggle:checked + .lbl-toggle.info + .tog-wrap
+
+ -- colour --
+ #62676F		rgb(98,103,111)		blue/grey
+ #D77526		rgb(215,117,38)		rust orange
+ #EDE9E6		rgb(237,233,230)	soft light grey (borders)
+
+ #414751		rgb(65,71,81)		dark blue/grey
+ #768293		rgb(118,130,147)	medium blue/grey
+ */
+/*
+ -- RESET --
+ based on the Reset by Eric Meyer.
+ thanks, Eric :-)
+ http://meyerweb.com/eric/tools/css/reset/
+ v2.0 | 20110126
+ License: none (public domain)
+ */
+
+
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+ /* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+* {
+	box-sizing: border-box;
+}
+
+ /* general */
+body {
+	font-family: 'Fira Sans Condensed', Calibri, Helvetica, Arial, sans-serif;
+	font-size: 1em;
+	line-height: 1.4;
+	color: #62676f;
+	background: #F4F1EF;
+}
+ul, ol {
+	/*max-width: 36em;*/
+	list-style: none;
+	margin: 0 0 1.26em 0;
+}
+ul {
+	list-style: circle;
+	font-weight: 300;
+}
+ol li {
+	margin: .8em 0;
+}
+blockquote, q {
+	quotes: none;
+	max-width: 36em;
+}
+blockquote:before, blockquote:after, q:before, q:after {
+	content: '';
+	content: none;
+}
+sup {
+	text-transform: lowercase;
+	font-size: .6em;
+	position: relative;
+	top: -0.5em;
+}
+
+blockquote p:last-of-type {
+	margin-bottom: .25em;
+}
+blockquote:before {
+	content: ' \201C ';
+	float: left;
+	margin: 0 0 0 -.5em;
+	font-size: 3em;
+	font-style: normal;
+	line-height: 1;
+	color: #c1c8d3;
+}
+
+iframe {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+iframe + h3 {
+	margin-top: 4ch;
+}
+
+ /* ------------------------------------------------------
+ TYPOGRAPHY
+ ------------------------------------------------------ */
+h1, h2, h3, h4, h5, h6 {
+	font-weight: 300;
+	line-height: 1.26;
+	color: #414751;
+	 /*	margin: 0 0 .36em 0; DW */
+	 /* half of prior setting */
+	margin: 0 0 .18em 0;
+	clear: both;
+}
+h1 {
+	font-size: 2.6em;
+	font-size: clamp(1.3em, 5vw, 2em);
+}
+h2 {
+	margin: 0 0 0 0;
+	font-size: 2em;
+	font-size: clamp(1.3em, 5vw, 2em);
+	font-weight: 300;
+	color: #ffffff;
+}
+h3 {
+	font-size: 2em;
+	font-weight: 300;
+	color: rgba(215, 117, 37, 1);
+	font-size: 2em;
+
+}
+h4 {
+	font-size: 1.6em;
+}
+h5 {
+	font-size: 1.4em;
+}
+h6 {
+	font-size: 1.2em;
+}
+p {
+	font-size: 1.1em;
+	font-weight: normal;
+	max-width: 36em;
+	margin-bottom: 1.5em;
+	/*color: #fff;*/
+}
+
+.critlinks p {
+	color: #fff;
+	font-size: 1.26em;
+	font-weight: normal;
+}
+article p + p {
+	margin-top: -0.6em;
+}
+article > h1 + p, article > h1 + h2, article > h1 + div {
+	/* DW */
+	margin-top: 1.5em;
+}
+b, strong {
+	font-weight: normal;
+}
+em {
+	font-style: italic;
+	color: #313337;
+}
+small {
+	display: block;
+	max-width: 38em;
+	font-size: .95em;
+	font-weight: 300;
+	margin-bottom: 1.6em;
+}
+.fade {
+	opacity: 0.6;
+}
+
+
+/* ------------------------------------------------------
+LINKS
+------------------------------------------------------ */
+a:link, a:visited {
+	color: #D77526;
+	transition: all .36s ease-in-out;
+}
+a:hover, a:active, a:focus {
+	color: #62676F;
+	transform: scale(1.2);
+}
+
+/* ------------------------------------------------------
+LAYOUT
+------------------------------------------------------ */
+header, footer {
+	background: #fff;
+}
+#wrap {
+	padding: 2em 8vw;
+	background: #313337;
+
+}
+
+img {
+	display: block;
+	width: 100%;
+	max-width: 256px;
+	height: auto;
+}
+
+.left {
+	float: left;
+	margin: 0 12px 6px 0;
+}
+.resize-none {
+	width: 100%;
+	max-width: 100%;
+	height: auto;
+}
+/* ------------------------------------------------------
+HEADER
+------------------------------------------------------ */
+header {
+	background: #fff;
+	padding: 2em 8vw;
+	border-bottom: .26em solid #768293;
+	border-top: .36em solid rgba(215, 117, 37, 1);
+}
+header svg {
+	display: block;
+	width: 100%;
+	max-width: 124px;
+	height: auto;
+	margin: 0 auto;
+}
+header em {
+	font-size: 10vw;
+	line-height: 1;
+	font-style: normal;
+	text-transform: uppercase;
+	font-weight: 800;
+	display: block;
+	margin: 0 auto 12px auto;
+}
+header h1 {
+	transform: scale(1);
+	line-height: 1;
+}
+header h1 strong {
+	color: rgba(215, 117, 37, 1);
+	font-weight: 500;
+}
+header h1 span {
+	font-weight: 400;
+}
+header h1 span:nth-of-type(1) {
+	font-weight: normal;
+	color: rgba(65, 71, 81, 1);
+}
+header h1 span:nth-of-type(2) {
+	font-weight: 300;
+	color: rgba(215, 117, 37, 1);
+	font-size: 2em;
+	line-height: 0;
+	position: relative;
+	bottom: -.16em;
+}
+header h1 span:last-of-type {
+	/*display: block;*/
+	color: rgba(98, 103, 111, 1);
+}
+
+/* ------------------------------------------------------
+CONTENT
+------------------------------------------------------ */
+
+/* ------------------------------------------------------
+ content toggles, default: inside ol li */
+input[type='checkbox'] {
+	/*display: none;*/
+	opacity: 0;
+	position: absolute;
+}
+label.lbl-toggle::before {
+  content: "";
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+}
+input[type="checkbox"]:focus-visible + label::before {
+  box-shadow: inset 0 0 0 0.1em #fff;
+  outline: none;
+}
+.tog-wrap input[type="checkbox"]:focus-visible + label::before {
+  box-shadow: inset 0 0 0 0.1em #313337;
+  outline: none;
+}
+
+.lbl-toggle {
+	clear: none;
+	display: block;
+	position: relative;
+	padding: 24px 24px 24px 48px;
+	margin: 0;
+	font-size: 1.4em;
+	line-height: 1.2;
+	font-weight: 600;
+	text-transform: capitalize;
+	color: #313337;
+	cursor: pointer;
+	transition: all 0.25s ease-out;
+	background: #F4F1EF;
+	transition: .5s ease-out;
+}
+.toggle + .lbl-toggle {
+	/*opacity: .75;*/
+}
+.lbl-toggle:hover {
+	color: #fff;
+	background: #d77524;
+}
+.toggle + .lbl-toggle:hover:after {
+	color: #fff;
+}
+.toggle:checked + .lbl-toggle {
+	opacity: 1;
+	background: none;
+	background: #F4F1EF;
+	border-bottom: 2px solid rgba(1, 68, 101, 1);
+	color: #313337;
+	/*margin: 0;*/
+}
+.toggle:checked + .lbl-toggle:hover {
+	color: #fff;
+	background: #d77524;
+}
+.lbl-toggle::after {
+	content: ' \+';
+	color: #d77524;
+	font-size: 2em;
+	font-weight: normal;
+	line-height: 0;
+	display: block;
+	transform-origin: center;
+	transition: transform .2s ease-out;
+	transform: rotate(90deg);
+	position: absolute;
+	top: 36px;
+	left: 12px;
+
+}
+.toggle:checked + .lbl-toggle::after {
+	transform: rotate(135deg);
+}
+
+.weeks .tog-wrap .lbl-toggle:hover, .weeks .tog-wrap .toggle:checked + .lbl-toggle:hover {
+	color: #d77524;
+	background: #fff;
+}
+
+/* hide */
+.toggle + .lbl-toggle + .tog-wrap {
+	display: none;
+	margin: 0;
+	padding: 0;
+	background-color: rgba(245, 241, 239, 0);
+	max-height: 0px;
+	overflow: hidden;
+	opacity: 0;
+	transition: max-height .25s ease-in-out, all .25s ease-in-out;
+}
+/* show */
+.toggle:checked + .lbl-toggle + .tog-wrap {
+	display: block;
+	position: relative;
+	z-index: 200;
+	box-sizing: border-box;
+	max-height: 2000vh;
+	overflow: visible;
+	margin: 0;
+	background-color: #F4F1EF;
+	padding: 22px 44px;
+	opacity: 1;
+}
+/* targeted toggles, accessed via link */
+.toggle:target + .lbl-toggle + .tog-wrap {
+	display: block;
+	max-height: 9000vh;
+	overflow: visible;
+}
+.toggle:target:checked + .lbl-toggle + .tog-wrap {
+	display: none;
+}
+.toggle:target + .lbl-toggle span::before {
+	transform: rotate(0);
+	background: #333;
+}
+.toggle:target:checked + .lbl-toggle span::before {
+	transform: rotate(45deg);   
+}
+
+/* adjust padding for past deadlines, after new summer session update */
+.toggle:checked + .lbl-toggle.deadlines-past + .tog-wrap {
+	padding: 0;
+}
+
+
+ul {
+	list-style: none;
+}
+ul li {
+	max-width: 256px;
+	text-align: center;
+}
+ul li a:link, ul li a:visited {
+	display: block;
+	padding: 6px;
+	text-decoration: none;
+	color: #f2f0ee;
+	font-weight: 500;
+	background: #313337;
+	transition: all .36s ease-in-out;
+}
+ul li a:hover, ul li a:active, ul li a:focus {
+	color: #D77526;
+	padding: 3px;
+	transform: scale(1);
+}
+ul li a figure img {
+	margin-bottom: 6px;
+}
+/* crit slides + feedback forms */
+.critlinks li em {
+	color: #d77524;
+	font-style: normal;
+	
+}
+.crits li {
+	width: 8em;
+	max-width: 360px;
+	text-align: left;
+	font-weight: 300;
+	border: 1px solid #d77524;;
+	color: #fff;
+	font-size: 1.4em;
+	margin: 0 12px 12px 0;
+}
+.critlinks .crits li strong {
+	font-size: 1.26em;
+	display: block;
+		padding: .26em;
+	background: #d77524;
+	color: #313337;
+	border-bottom: 1px solid #313337;
+}
+
+.crits li a:link, .crits li a:visited {
+	padding: .26em;
+	box-shadow: inset 0 0 0 0 #fff;
+	font-size: .8em;
+
+}
+.crits li a:hover, .crits li a:active, .crits li a:focus {
+	color: #d77524;
+	box-shadow: inset 300px 0 0 0 #fff;
+	cursor: pointer;
+}
+
+
+.crits li a:link:before {
+	content: ' \2192 ';
+	display: inline;
+	margin: 0 .26em 0 0;
+}
+/* DW remove styling for link to feedback form
+.crits li a:link:last-of-type, .crits li a:visited:last-of-type {
+	border-top: 1px solid #d77524;
+	color: #d77524;
+	font-weight: 300;
+	box-shadow: inset 0 0 0 0 #d77524;
+
+}
+.crits li a:hover:last-of-type, .crits li a:active:last-of-type, .crits li a:focus:last-of-type {
+	border-top: 1px solid #d77524;
+	color: #313337;
+	font-weight: 300;
+	box-shadow: inset 300px 0 0 0 #d77524;
+}
+/*
+
+/* initialize counter */
+.critlinks ol {
+    counter-reset:li;
+}
+
+/* disable automatic decimal numbers */
+.critlinks ol  li {
+    list-style: none;
+	color: #fff;
+	font-size: 1.26em;
+	text-align: left;
+}
+
+/* initialize counter */
+
+.critlinks ol  > li:before {
+	content: counter(li); /* Use the counter as content */
+	counter-increment: li;
+	font-size: 1.36em;
+	line-height: 1.1;
+	font-weight: 800;
+	background: #d77526;
+	display: block;
+	margin: 0 0 0 -46px;
+	position: relative;
+	z-index: 20;
+	float: left;
+	width: 33px;
+	height: 33px;
+	border-radius: 50%;
+	text-align: center;
+	color: #fff;
+	border: 1px solid #d77526;
+}
+
+.critlinks ol li ol > li:before {
+	background: none;
+	font-weight: 600;
+	line-height: 1.3;
+}
+.critlinks ol li ol > li em {
+	display: block;
+	font-size: 1.2em;
+}
+.critlinks ol li ol li ul {
+	margin-top: 1em;
+}
+.critlinks ol li ol li ul li {
+	font-size: 1em;
+	margin: 0 0 .5em 1.5em;
+	width: 100%;
+}
+
+/* MP GUIDE  */
+.critlinks ol li .toggle:checked + .lbl-toggle.mp + .tog-wrap {
+	margin-left: 0;
+	padding: 12px 0;
+	max-width: 80em;
+	background: none;
+	font-size: .7em;
+}
+.critlinks ol li .lbl-toggle.mp {
+	font-size: 1em;
+	padding: 6px 36px;
+	color: #8bc6f2;
+	color: rgba(113, 122, 133, 1.000);
+	color: #8bc6f2;	
+	margin-bottom: 1ch;
+	background: none;
+}
+.critlinks ol li  .lbl-toggle.mp:hover {
+	color: #d77526;
+	background: none;	
+}
+.critlinks .toggle:checked + .lbl-toggle.mp + .tog-wrap h3 {
+	margin: 0 0 .36em 0;
+	font-weight: 300;
+	font-size: 2em;
+	line-height: 1.26;
+	color: rgba(139, 198, 242, 1);
+}
+.critlinks .lbl-toggle.mp sup {
+	color: inherit;
+}
+.critlinks .lbl-toggle.mp::after {
+	top: 18px;
+	left: 0;
+	color: #fff;
+}
+.critlinks .toggle:checked + .lbl-toggle {
+	color: #fff;
+}
+
+.critlinks .toggle:checked + .lbl-toggle::after {
+	transform: rotate(135deg);
+	color: #8bc6f2;
+}
+
+.critlinks-style: none;
+	margin: 2ch 0;
+}
+
+.critlinks .tog-wrap ul.questions li {
+	display: flow-root;
+	margin: 0 0 1em 0;
+	max-width: 44em;
+	font-size: 1em;
+}
+
+.critlinks .tog-wrap ul li:before {
+	content: ' \? ';
+	color: #d77524;
+	display: block;
+	width: 1em;
+	height: 1em;
+	padding: .2em;
+	margin: 0 6px 0 -38px;
+	float: left;
+	border: 1px solid rgba(139, 198, 242, 1);
+	border-radius: 50%;
+	text-align: center;
+	font-weight: 500;
+	line-height: 1;
+}
+.critlinks .toggle:checked + .lbl-toggle .tog-wrap li:before {
+	color: #8bc6f2;
+}
+.critlinks .tog-wrap li strong {
+	display: block;
+	margin: 0 0 .5ch 0;
+	color: #d77524;
+}
+.critlinks .tog-wrap ul.questions li em {
+	color: #8bc6f2;	
+}
+.critlinks .tog-wrap ul.questions li strong em  {
+	display: inline-block;
+	margin: 0 .5ch 0 0;
+
+	color: rgba(113, 122, 133, 1.000);
+	color: #8bc6f2;	
+}
+
+.critlinks .tog-wrap ol li ul li:before, .critlinks .tog-wrap ul.focused li:before, .tog-wrap ul.focused li:before {
+	content: ' \• ';
+	font-weight: 800;
+	color: #d77524;
+	display: block;
+	width: 1em;
+	height: 1em;
+	padding: .1em;
+	margin: 0 6px 0 -28px;
+	float: left;
+	border: 1px solid rgba(139, 198, 242, 1);
+	border-radius: 50%;
+	text-align: center;
+	font-weight: 500;
+	line-height: 1;
+}
+.critlinks .tog-wrap div {
+	padding: 2ch 2ch 4ch 4ch;
+	margin: 0 0 4ch 0;
+	background: rgba(0,0,0,.5);
+}
+
+
+
+
+/* ------------------------------------------------------
+FOOTER
+------------------------------------------------------ */
+footer {
+	background: #fff;
+	padding: 2em 8vw 1em 8vw;
+	position: relative;
+}
+footer p {
+	font-size: 1em;
+	font-weight: normal;
+	max-width: 36em;
+	margin-bottom: .5em;
+	color: #4b4f55;
+}
+footer p strong {
+	font-weight: 600;
+}
+a:link.back, a:visited.back {
+	text-decoration: none;
+	display: inline-block;
+	width: 1.2em;
+	height: 1.2em;
+	margin: 0 12px 0 0;
+	background: #d77524;
+	color: #fff;
+	text-align: center;
+	border-radius: 50%;
+}
+a:hover.back, a:active.back, a:focus.back {
+	display: inline-block;
+	background: #768293;
+	color: #fff;
+}
+/* fade inactive links */
+a[href^="#"] {
+  opacity: .25;
+}
+
+/* ------------------------------------------------------
+MEDIA QUERIES
+------------------------------------------------------ */
+@media (min-width: 400px) {
+	header h1 {
+		transform: scale(1);
+	}
+}
+
+@media (min-width: 480px) {
+
+}
+@media (min-width: 520px) {
+	 /* header */
+	 header {
+	 	display: flow-root;
+	 }
+	 header svg {
+		width: 183px;
+		display: inline;
+		/*float: left;*/
+		margin-right: 7px;
+	}
+	header h1 {
+		display: inline-block;
+		/*float: left;*/
+		width: calc(100% - 200px);
+		padding-top: .5em;
+		line-height: .8;
+	}
+	header em {
+		/*font-size: 8vw;*/
+		line-height: 1;
+		font-style: normal;
+		text-transform: uppercase;
+		font-weight: 800;
+		display: block;
+	}
+	header h1 strong {
+		/*font-size: 6vw;*/
+	}
+	header h1 span {
+		/*font-size: 6vw;*/
+	}
+	header h1 span:nth-of-type(2) {
+		/*font-size: 10vw;*/
+	}
+}
+
+
+
+@media (min-width: 720px) {
+	header h1 {
+		/*font-size: 3.3vw;*/
+		line-height: 1;
+		/*padding-top: 2.2em;*/
+	}
+
+	header em {
+		font-size: 6vw;
+	}
+	header h1 span, header h1 strong {
+		/*font-size: 3vw;*/
+	}
+	header h1 span:nth-of-type(2) {
+		/*font-size: 6vw;*/
+	}
+	
+	/* blocks - default */
+	ul, ul.crits {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: stretch;
+		align-content: center;
+		flex-basis: auto;
+	}
+	ul li {
+		margin: 0 4vw 4vw 0;
+		font-size: .96em;
+	}
+	ul.crits li {
+		max-width: 360px;
+		margin: 0 4vw 4vw 0;
+	}
+	.critlinks ol li ul {
+		display: block;
+		text-align: left;
+	}
+	.critlinks ol li ul.questions li {
+		display: block;
+		width: 100%;
+		max-width: 100%;
+		margin: 0 0 1em 0;
+	}
+	.critlinks ol li ol li ul li {
+		font-size: 1em;
+		margin: 0 0 .5em 1.5em;
+		width: 100%;
+		max-width: 100%;
+	}
+}
+
+@media (min-width: 780px) {
+
+}
+
+@media (min-width: 900px) {
+
+}
+/* large */
+@media (min-width: 1280px) {
+	#wrap {
+		padding: 2em 4vw;
+		background: #313337;
+
+	}
+	header, footer {
+		padding: 2em 4vw;
+	}
+	
+
+	footer {
+		display: flow-root;
+		padding: 2em 6vw 1em 4vw;
+		margin: 0;
+	}
+	footer p {
+		float: left;
+	}
+	
+	
+	
+	footer p:last-of-type {
+		float: right;
+		text-align: right;
+	}
+	footer p:only-child {
+		float: none;
+		width: 100%;
+		max-width: 100%;
+		text-align: left;
+	}	
+
+}

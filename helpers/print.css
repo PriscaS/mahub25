@@ -1,0 +1,51 @@
+/* @override 
+	print.css */
+header {
+	padding: 0;
+	margin: 0;
+	font-size: 24px;
+	height: 7cm;
+}
+header em {
+	font-size: 24px;
+}
+header span.name, header span {
+	font-size: 8px;
+}
+header svg {
+	margin: 0;
+}
+aside {
+	display: none;
+	height: 0;
+}
+main {
+	padding: 0;
+	margin: 0;
+}
+/* tools list */
+ul {
+	display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    align-content: center;
+    flex-basis: auto;
+    flex-wrap: wrap;
+    flex-basis: auto;
+    align-items: center;
+    gap: 1em;
+	justify-content: space-between;
+}
+ul li {
+	width: 30%;
+	width: calc(30% - 1em);
+}	
+img {
+	 page-break-before: auto; 
+	 page-break-after: auto; 
+	 page-break-inside: avoid; 
+}
+img.align-right {
+	width: 12cm;
+	float: right;
+}
